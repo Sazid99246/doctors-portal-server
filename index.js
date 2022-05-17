@@ -18,7 +18,6 @@ async function run() {
         const bookingsCollection = client.db("doctors_portal").collection("bookings")
 
         app.get('/service', async(req, res)=>{
-            const query = {};
             const cursor = servicesCollection.find(query);
             const services = await cursor.toArray();
             res.send(services)
