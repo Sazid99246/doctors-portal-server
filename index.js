@@ -16,6 +16,7 @@ async function run() {
         await client.connect();
         const servicesCollection = client.db("doctors_portal").collection("services")
         const bookingsCollection = client.db("doctors_portal").collection("bookings")
+        const usersCollection = client.db("doctors_portal").collection("users")
 
         app.get('/service', async (req, res) => {
             const query = {};
@@ -78,7 +79,16 @@ async function run() {
             const result = await bookingsCollection.insertOne(booking);
             return res.send({ success: true, result });
           })
-      
+          app.put('/user/email', async(req, res)=>{
+            const email = req.params.email;
+            const user = req.body;
+            const filter = {email: email}
+            const options = { upsert: true }
+            const updateDoc = {
+              $set: user,
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc, options)
+          })
         }      
     finally {
 
