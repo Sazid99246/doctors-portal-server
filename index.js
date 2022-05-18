@@ -32,9 +32,9 @@ async function run() {
          * app.patch('/booking/:id') // update a sepcific booking
          * app.delete('/booking/:id') // delete a specific booking
         */
-       app.post('/booking', async (req, res)=>{
+       app.post('/booking', async(req, res)=>{
            const booking = req.body;
-           const result = bookingsCollection.insertOne(booking);
+           const result = await bookingsCollection.insertOne(booking)           
            res.send(result);
        })
     }
