@@ -79,7 +79,7 @@ async function run() {
             const result = await bookingsCollection.insertOne(booking);
             return res.send({ success: true, result });
           })
-          app.put('/user/email', async(req, res)=>{
+          app.put('/user/:email', async(req, res)=>{
             const email = req.params.email;
             const user = req.body;
             const filter = {email: email}
